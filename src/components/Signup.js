@@ -10,9 +10,6 @@ export const Signup = () => {
   const togglePopup = () => {
     setIsOpen(!isOpen);
   }
-  // function successfullRegister() {
-  //   alert("User Registered Successful!");
-  // }
   const validate = Yup.object({
     UserName:Yup.string()
       .max(15, 'Must be 15 characters or less')

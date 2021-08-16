@@ -1,14 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Formik, Form } from 'formik';
 import { TextField } from './TextField';
 import * as Yup from 'yup';
+import Popup from './Popup';
+
 
 export const Signup = () => {
-  function successfullRegister() {
-    alert("User Registered Successful!");
+  
+  const [isOpen, setIsOpen] = useState(false);
+ 
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
   }
   const validate = Yup.object({
-    
     UserName:Yup.string()
       .max(15, 'Must be 15 characters or less')
       .required('Required'),
@@ -51,14 +55,17 @@ export const Signup = () => {
             <TextField label="Email" name="email" type="email" />
             <TextField label="password" name="password" type="password" />
             <TextField label="Confirm Password" name="confirmPassword" type="password" />
-            <button className="btn btn-danger mt-3" id = 'button' onClick={successfullRegister}
- type="submit">Register</button>
-     
-            
-           
+            <button className="btn btn-danger mt-3" id = 'button' type="submit" onClick={togglePopup}>Register</button>
+            {isOpen && <Popup
+      content={<>
+        <p>Registered Successfully!</p>
+      </>}
+      handleClose={togglePopup}
+       />}
           </Form>
         </div>
       )}
     </Formik>
   )
+  
 }
